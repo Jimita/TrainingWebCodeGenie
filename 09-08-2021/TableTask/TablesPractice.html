@@ -1,0 +1,291 @@
+<html>
+
+<head>
+    <title>Tables</title>
+    <style>
+        .table,
+        .th,
+        .td {
+            border: 5px solid green;
+            border-collapse: collapse;
+        }
+        
+        .th,
+        .td {
+            padding: 15px;
+            text-align: left;
+        }
+        
+        #t01 {
+            width: 100%;
+            background-color: #f1f1c1;
+        }
+        
+        .flex-container {
+            display: flex;
+        }
+        
+        .flex-child {
+            flex: 1;
+            border: 2px;
+        }
+        
+        .flex-child:first-child {
+            margin-right: 20px;
+        }
+        
+        h3 {
+            background-color: black;
+            color: blanchedalmond;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="flex-child magenta">
+            <table class="table" style="width:30%">
+                <h3>Table Practice 1</h3>
+                <tr class="tr">
+                    <th class="th">S.N</th>
+                    <th class="th">Name</th>
+                    <th class="th">Mark</th>
+                    <th class="th">Percentage</th>
+                </tr>
+                <tr class="tr">
+                    <td class="td">1</td>
+                    <td class="td">Jimita</td>
+                    <td class="td">901</td>
+                    <td class="td">90.10%</td>
+                </tr>
+                <tr class="tr">
+                    <td class="td">2</td>
+                    <td class="td">Karishma</td>
+                    <td class="td">903</td>
+                    <td class="td">90.30%</td>
+                </tr>
+                <tr class="tr">
+                    <td class="td">3</td>
+                    <td class="td">Manush</td>
+                    <td class="td">904</td>
+                    <td class="td">90.40%</td>
+                </tr>
+                <tr class="tr">
+                    <td class="td">4</td>
+                    <td class="td">Tom</td>
+                    <td class="td">890</td>
+                    <td class="td">89.00%</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="flex-child green">
+
+            <table border="1">
+                <h3>Table Practice 2</h3>
+                <tr>
+                    <th>No</th>
+                    <th>Customer</th>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jimita</td>
+                    <td>TV</td>
+                    <td>September 04, 2020</td>
+                    <td>50,000</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Karan</td>
+                    <td>Washing Machine</td>
+                    <td>December 25, 2020</td>
+                    <td>20,000</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Aayushi</td>
+                    <td>Wall Frame</td>
+                    <td>July 13, 2020</td>
+                    <td>2,000</td>
+                </tr>
+                <tr>
+                    <th Colspan="4">
+                        <center>Total</center>
+                    </th>
+                    <th>72,000.000 </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-child magenta">
+            <table style="border-collapse: collapse;" Border="1" Cellpadding="5" Cellspacing="5">
+                <h3>Table Practice 3</h3>
+                <tr>
+                    <th Colspan="6" Align="center">Time Table</th>
+                </tr>
+                <tr>
+                    <th Rowspan="6">Hours</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>thu</th>
+                    <th>Fri</th>
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td>Maths</td>
+                    <td>Science</td>
+                    <td>Maths</td>
+                    <td>Arts</td>
+                </tr>
+                <tr>
+                    <td>Social</td>
+                    <td>History</td>
+                    <td>English</td>
+                    <td>Social</td>
+                    <td>Sports</td>
+                </tr>
+                <tr>
+                    <th Colspan="5" Align="center">Lunch</th>
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td>Maths</td>
+                    <td>Science</td>
+                    <td>Maths</td>
+                    <td Rowspan="2">Project</td>
+                </tr>
+                <tr>
+                    <td>Social</td>
+                    <td>History</td>
+                    <td>English</td>
+                    <td>Social</td>
+                </tr>
+            </table>
+            </Font>
+        </div>
+        <div class="flex-child green">
+            <table style="border-collapse: collapse;" Border="1" Cellpadding="5" Cellspacing="5">
+                <h3>Table Practice 4</h3>
+                <tr>
+                    <th colspan="2"> Subject</th>
+                    <th>Jimita Gandhi</th>
+                    <th>Shiv Shah</th>
+                </tr>
+                <tr>
+                    <th rowspan="2"> Biology</th>
+                    <th>Practical</th>
+                    <td>A</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <th>Theory</th>
+                    <td>A+</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">Chemistry</th>
+                    <th>Practical</th>
+                    <td>B</td>
+                    <td>C</td>
+                </tr>
+                <tr>
+                    <th>Theory</th>
+                    <td>A</td>
+                    <td>C+</td>
+                </tr>
+                <tr>
+                    <th rowspan="2"> Physics</th>
+                    <th>Practical</th>
+                    <td>A</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <th>Theory</th>
+                    <td>A-</td>
+                    <td>A-</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-child magento">
+            <table style="border-collapse: collapse;" Border="1" Cellpadding="5" Cellspacing="5">
+                <h3>Table Practice 5</h3>
+                <tr>
+                    <th rowspan="2">
+                        <th colspan="2">Average</th>
+                        <th rowspan="2">Red
+                            <br>eyes</th>
+                        <tr>
+                            <th>height</th>
+                            <th>weight</th>
+                            <tr>
+                                <th>Males</th>
+                                <td>1.9</td>
+                                <td>0.003</td>
+                                <td>40%</td>
+                                <tr>
+                                    <th>Females</th>
+                                    <td>1.7</td>
+                                    <td>0.002</td>
+                                    <td>43%</td>
+                                </tr>
+                            </tr>
+                        </tr>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <div class="flex-child green">
+            <h3>Table Practce 6</h3>
+            <table border="1" style="padding:4px;">
+                <tr>
+                    <th>Roll No</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Marks</th>
+
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Jimita</td>
+                    <td>7878787878</td>
+                    <td rowspan="5">75</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Akash</td>
+                    <td>7474747474</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Akash</td>
+                    <td>7474747474</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Akash</td>
+                    <td>7474747474</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Akash</td>
+                    <td>7474747474</td>
+                </tr>
+                <tr>
+                    <th Colspan="5" Align="center">Student Data</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

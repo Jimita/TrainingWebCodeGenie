@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <title>Form Task 3</title>
+    <style>
+        th {
+            text-align: left;
+        }
+        
+        input[type=text] {
+            width: 80%;
+        }
+        
+        input[type=password] {
+            width: 80%;
+        }
+        
+        input[type=number] {
+            width: 80%;
+        }
+        
+        input[type=email] {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="" action="">
+        <table border="1" align="center" width="400" style="background-color: rgb(238, 150, 123);">
+            <caption><b><i>KM Custom HTML Form Example Using HTML</i></b><br><em>(by Jimita)</em></caption>
+            <tr>
+                <th>Name:</th>
+                <td><input type="text" name="fn" id="fn1" maxlength="10" title="enter your first name" placeholder="enter your first name" required/></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><input type="email" /></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" /></td>
+            </tr>
+            <tr>
+                <th>Approval Required:<br><small>Click on the button or text to check/uncheck.</small></th>
+                <td> <input type="checkbox" id="checkbox1" name="checkbox1" value="1">
+                    <label for="checkbox1">Do you approve?</label></td>
+            </tr>
+            <tr>
+                <th>Pick You Favorite:<br>
+                    <small>Click on button or text to select.</small></th>
+                <td><input type="radio" name="choice" value="A" />Choice A<br><input type="radio" name="choice" value="b" />Choice B<br><input type="radio" name="choice" value="C" />Choice C</td>
+            </tr>
+            <tr>
+                <th>Popup Menu:</th>
+                <td><select name="texas" style="width: 70%;"><option value="" selected="selected" disabled="disabled">Texas -- TX</option><option value="1">Demo1</option><option value="2">Demo2</option></select></td>
+            </tr>
+            <tr>
+                <th>List<br><small>Setup Options:<ul><li>Number of rows to display</li><li>Allow Multi-select</li></ul></small></th>
+                <td> <select name="list" id="list" multiple>
+                    <option value="california">California -- CA</option>
+                    <option value="">Colorado -- CO</option>
+                    <option value="">Connecticut -- CN</option>
+                    <option value="">Dalifornia -- Da</option>
+                    <option value="">Dolorado -- DO</option>
+                  </select></td>
+            </tr>
+            <tr>
+                <th>Field Ignored by KM</th>
+                <td><input type="number" max="5" /></td>
+            </tr>
+            <tr>
+                <th>TextArea </th>
+                <td><textarea rows="4" cols="20"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left">
+                    <input type="submit" style="background-color: rgb(57, 57, 199); color: white; padding: 3px;width: 15%; border-radius: 40%; " value="Save" />&nbsp;
+                    <input type="reset" style="background-color: rgb(235, 235, 243); color: rgb(2, 2, 2); padding: 3px;width: 15%; border: 1 solid blue; border-radius: 40%; " value="Cancel" />&nbsp;
+                    <input type="reset" style="background-color: rgb(213, 213, 238); color: rgb(5, 2, 2); padding: 3px;width: 15%; border-radius: 40%; " value="Resize" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
