@@ -1,0 +1,53 @@
+<!-- 21.	Write a program to display Alphabets -->
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Alphabets</title>
+
+    <script>
+        function printAlphabets(option) {
+
+
+            var i = 65;
+            var j = 91;
+
+
+            if (option == 'small') {
+                i = 97;
+                j = 123;
+            }
+
+            //clear the result
+            document.getElementById("result").innerHTML = '';
+
+
+            for (k = i; k < j; k++) {
+                //convert the char code to string (Alphabets)
+                var str = String.fromCharCode(k);
+                //print the result
+                document.getElementById("result").insertAdjacentHTML('beforeend', str + " ");
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+
+
+    <h2>Print Alphabets</h2>
+
+    <button onclick="printAlphabets()">Capital Alphabets</button>
+    <button onclick="printAlphabets('small')">Small Alphabets</button>
+
+    <br><br>
+    <b>Result:</b>
+    <div id="result"></div>
+    </div>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!-- 20.	Take a number and calculate sum of natural numbers -->
+<html>
+
+<head>
+    <title>Sum of Natural Number</title>
+</head>
+
+<body>
+    <h1>Sum of Natural Number</h1>
+    <input type="number" id="number">
+    <button onclick="sum()">Sum</button>
+</body>
+
+<script>
+    function sum() {
+        var num = document.getElementById("number").value;
+        var sum = 0;
+        for (var i = 1; i <= num; i++) {
+            sum = sum + i;
+            document.write(i + "<br>");
+        }
+        document.write("Sum of Total natural Number : " + sum);
+    }
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!-- 15.	Take 3 numbers and find greatest number using nested IF….ELSE statement -->
+<html>
+
+<head>
+    <title>Largest Number with 3 inputs</title>
+</head>
+
+<body></body>
+<script type="text/javascript">
+    function isCheck(num1, num2, num3) {
+        if (num1 > num2 && num1 >= num3) {
+            return num1;
+        } else if (num2 >= num1 && num2 >= num3) {
+            return num2;
+        } else if (num1 == num2) {
+            document.write("Both are Equal");
+        } else {
+            return num3;
+        }
+    }
+    var num1 = prompt("Enter Number 1");
+    var num2 = prompt("Enter Number 2");
+    var num3 = prompt("Enter Number 3");
+    // var largest = Math.max(num1, num2,num3);
+    // console.log(`${num1},${num2},${num3}: Largest = ${largest}`);
+    var largest = isCheck(num1, num2, num3);
+    document.write(`${num1},${num2},${num3}: Largest = ${largest}`);
+</script>
+
+
+</html>

@@ -1,0 +1,29 @@
+<!-- 18.	Write a program to check whether character is alphabet or not. -->
+<html>
+
+<head>
+    <title>Alphabet or Not</title>
+</head>
+
+<body>
+    <h2>18. check whether character is alphabet or not</h2>
+    <br><br>
+    <label>Enter Character</label>
+    <input type="text" name="" id="ch" onkeyup="isCheck()"><span id="ans"></span>
+</body>
+<script>
+    function isCheck() {
+        var ch = document.getElementById('ch').value;
+        // alert(ch);
+        if (ch >= 'A' && ch <= 'Z' || (ch >= 'a' && ch <= 'z')) {
+            document.getElementById('ans').innerHTML = ch + " is an alphabet";
+        } else {
+            document.getElementById('ans').innerHTML = ch + " is not an alphabet";
+        }
+        if (ch == "") {
+            document.getElementById('ans').innerHTML = ch + " is null";
+        }
+    }
+</script>
+
+</html>

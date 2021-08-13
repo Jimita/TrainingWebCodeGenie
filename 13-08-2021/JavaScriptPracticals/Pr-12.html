@@ -1,0 +1,35 @@
+<!-- 12.	Take a number check if a number is less than 100 or not. If it is less than 100 then check if it is odd or even. -->
+
+<html>
+
+<head>
+    <title>Check Number</title>
+</head>
+
+<body>
+    <h2>12. Take a number check if a number is less than 100 or not. If it is less than 100 then check if it is odd or even.</h2>
+    <br><br>
+    <label>Enter Number</label>
+    <input type="number" name="" id="oddeven" onkeyup="isCheck()"><span id="ans"></span>
+</body>
+<script>
+    function isCheck() {
+        var num = document.getElementById('oddeven').value;
+        // alert(num);
+        // check reminder
+        if (num <= 100) {
+            if (num % 2 === 0) {
+                document.getElementById('ans').innerHTML = "Number " + num + "is an EVEN number";
+            } else {
+                document.getElementById('ans').innerHTML = "Number " + num + "is an ODD number";
+            }
+            if (num == "") {
+                document.getElementById('ans').innerHTML = "";
+            }
+        } else {
+            document.write("<h2>Please enter number less than 100</h2>");
+        }
+    }
+</script>
+
+</html>

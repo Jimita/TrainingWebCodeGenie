@@ -1,0 +1,74 @@
+<!--22.	Make a simple calculator using switch case.
+a.	1.Addition
+b.	2.Subtraction
+c.	3.Multiplication
+d.	4.Division
+  -->
+<html>
+
+<head>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <input type="text" id="oper1" value="">
+    <select id="operx">
+    <option value="0">+</option>
+    <option value="1">-</option>
+    <option value="2">*</option>
+    <option value="3">/</option>
+    </select>
+    <input type="text" id="oper2" value="">
+    <input type="button" onClick="calc();" value="Solve"><br/><br/>
+    <p id="resul">The answer is : </p>
+    <script>
+        function plus(a, b) {
+            return (Number(a) + Number(b));
+        }
+
+        function minus(a, b) {
+            return (a - b);
+        }
+
+        function multiply(a, b) {
+            return (a * b);
+        }
+
+        function divide(a, b) {
+            return (a / b);
+        }
+
+        function calc() {
+            var w;
+            var x = document.getElementById("oper1").value;
+            var y = document.getElementById("operx").value;
+            var z = document.getElementById("oper2").value;
+            //document.getElementById("resul").innerHTML=w;
+
+            switch (y) {
+                case '0':
+                    w = plus(x, z);
+                    document.getElementById("resul").innerHTML = w;
+                    break;
+                case '1':
+                    w = minus(x, z);
+                    document.getElementById("resul").innerHTML = w;
+                    break;
+                case '2':
+                    w = multiply(x, z);
+                    document.getElementById("resul").innerHTML = w;
+                    break;
+                case '3':
+                    w = divide(x, z);
+                    document.getElementById("resul").innerHTML = w;
+                    break;
+                default:
+                    w = "Don't really know..";
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

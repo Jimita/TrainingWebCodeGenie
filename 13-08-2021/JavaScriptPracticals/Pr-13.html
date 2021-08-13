@@ -1,0 +1,28 @@
+<!-- 13.	Take a number to print the square of a number if it is less than 10. -->
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <h2 style="color:rgb(0, 0, 0);">13. Take a number to print the square of a number if it is less than 10.</h2>
+    Enter Number: <input type="text" id="num"><br>
+    <br>
+    <input type="submit" value="Square" onclick="isCheck()">
+    <p>Square of number is : </p>
+    <p id="ans" style="color:rgb(48, 128, 10);"></p>
+</body>
+<script type="text/javascript">
+    function isCheck() {
+        var num = document.getElementById('num').value;
+        if (num <= 10) {
+            var res = Number(num) * Number(num);
+            document.getElementById('ans').innerHTML = res;
+        } else {
+            document.write("Please enter value less than 10")
+        }
+    }
+</script>
+
+</html>

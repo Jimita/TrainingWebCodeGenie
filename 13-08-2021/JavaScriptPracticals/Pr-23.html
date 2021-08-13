@@ -1,0 +1,50 @@
+<!-- 23.	Take 5 numbers and calculate percentage. According to that percentage print grade.
+•	If marks <50 then Grade is F.
+•	if marks >=50 <60 then Grade is D.
+•	if marks >=60 <70 then Grade is C.
+•	if marks >=70 <80 then Grade is B.
+•	if marks >=80 <90 then Grade is A.
+•	if marks >=90 then Grade is A+
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Percentage and Grade</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var English = parseInt(prompt("Enter English Marks"));
+    var Maths = parseInt(prompt("Enter Maths Marks"));
+    var Physics = parseInt(prompt("Enter Physics Marks"));
+    var Chemistry = parseInt(prompt("Enter Chemistry Marks"));
+    var Biology = parseInt(prompt("Enter Biology Marks"));
+
+    function Percentage(num1, num2, num3, num4, num5) {
+        var x = num1 + num2 + num3 + num4 + num5;
+        var z = Math.floor(x / 500 * 100) //percentage formula
+        return z;
+    }
+
+    var Total = Percentage(English, Maths, Physics, Chemistry, Biology);
+    document.write("Total Percentage is :" + Total + "%")
+    if (Total < 50) {
+        document.write("<h2>Grade : F</h2>");
+    } else if (Total >= 50 && Total <= 60) {
+        document.write("<h2>Grade : D</h2>");
+    } else if (Total >= 60 && Total <= 70) {
+        document.write("<h2>Grade : C</h2>");
+    } else if (Total >= 70 && Total <= 80) {
+        document.write("<h2>Grade : B</h2>");
+    } else if (Total >= 80 && Total <= 90) {
+        document.write("<h2>Grade : A</h2>");
+    } else if (Total >= 90 && Total <= 100) {
+        document.write("<h2>Grade : A+</h2>");
+    }
+</script>
+
+</html>

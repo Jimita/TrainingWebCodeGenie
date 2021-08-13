@@ -1,0 +1,60 @@
+<!-- 1.	Calculate area of a rectangle. -->
+<!-- 2.	Calculate area of a square -->
+<!-- 3.	Calculate area of a circle. -->
+<html>
+
+<head>
+    <title>
+        Calculate Area
+    </title>
+</head>
+
+<body>
+    <!-- 1.	Calculate area of a rectangle. -->
+    <h2 style="color:rgb(0, 0, 0);">1. Calculate area of a Rectangle.</h2>
+    Length: <input type="text" id="length"><br>
+    <br> Width:
+    <input type="text" id="width"><br><br>
+    <input type="submit" value="Area of Rectangle" onclick="calculateRect()">
+    <p>Area of Rectangle: </p>
+    <p id="rectAns" style="color:rgb(48, 128, 10);"></p>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+    <!-- 2.	Calculate area of a square -->
+    <h2 style="color:rgb(0, 0, 0);">2. Calculate area of a Square.</h2>
+    Side: <input type="text" id="side"><br>
+    <br>
+    <input type="submit" value="Area of square" onclick="calculateSquare()">
+    <p>Area of Square: </p>
+    <p id="squareAns" style="color:rgb(48, 128, 10);"></p>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+    <!-- 3.	Calculate area of a circle. -->
+    <h2 style="color:rgb(0, 0, 0);">3. Calculate area of a Circle.</h2>
+    Radius: <input type="text" id="radius"><br>
+    <br>
+    <input type="submit" value="Area of Circle" onclick="calculateCircle()">
+    <p>Area of Square: </p>
+    <p id="circleAns" style="color:rgb(48, 128, 10);"></p>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+</body>
+<script>
+    function calculateRect() {
+        var l = document.getElementById('length').value;
+        var w = document.getElementById('width').value;
+        var res = Number(l) * Number(w);
+        document.getElementById('rectAns').innerHTML = res;
+    }
+
+    function calculateSquare() {
+        var side = document.getElementById('side').value;
+        var res = Number(side) * Number(side);
+        document.getElementById('squareAns').innerHTML = res;
+    }
+
+    function calculateCircle() {
+        var radius = document.getElementById('radius').value;
+        var res = Math.PI * Number(radius) * Number(radius);
+        document.getElementById('circleAns').innerHTML = res;
+    }
+</script>
+
+</html>

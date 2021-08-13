@@ -1,0 +1,28 @@
+<!-- 9.	Take a number and find factorial of that number -->
+<html>
+
+<head>
+    <title>Factorial</title>
+</head>
+
+<body>
+    <h2>Factorial Number</h2>
+</body>
+<script type="text/javascript">
+    var number = prompt("Enter Number");
+    var fact = 1;
+    if (number == 0) {
+        document.write(`The factorial of ${number} is 1`);
+    } else if (number < 0) {
+        document.write(`The factorial of -ve numbers is not possible`);
+    } else {
+        for (var i = 1; i <= number; i++) {
+            document.write(`${i}`);
+            fact = fact * i;
+            // 1*1*2*3*4*5
+        }
+        document.write(`The factorial of ${number} is ${fact}`);
+    }
+</script>
+
+</html>

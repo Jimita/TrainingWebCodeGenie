@@ -1,0 +1,30 @@
+<!-- 19.	Take a number from the user. Take starting number & ending number from the user. Generate multiplication table of that number. -->
+<html>
+
+<head>
+    <title>
+        Table
+    </title>
+</head>
+
+<body>
+    <h1>Table</h1>
+</body>
+<script>
+    const number = parseInt(prompt('Enter an Integer: '));
+
+
+    const start = parseInt(prompt('Enter a Start Number: '));
+
+
+    const end = parseInt(prompt('Enter a End Number: '));
+
+    //creating a multiplication table
+    for (let i = start; i <= end; i++) {
+        const result = i * number;
+        document.write(`${number} * ${i} = ${result}`);
+        document.write("<br>");
+    }
+</script>
+
+</html>

@@ -1,0 +1,39 @@
+<!-- 24.	Take starting number and ending number from the user and print following series.
+Output :-
+Enter starting number : 30
+Enter ending number : 0
+30
+ 27
+ 24
+ 21
+ 18
+ 15
+ 12
+ 9
+ 6
+ 3
+ 0
+ -->
+<html>
+
+<head>
+    <title>
+        Series
+    </title>
+</head>
+
+<body>
+    <h1>Series</h1>
+    <p id="demo"></p>
+</body>
+<script>
+    const start = parseInt(prompt('Enter a Start Number: '));
+    const end = parseInt(prompt('Enter a End Number: '));
+    for (let i = start; i <= end; i += 3) {
+        var result = i;
+        document.write(`${result}`);
+        document.write("<br>");
+    }
+</script>
+
+</html>
