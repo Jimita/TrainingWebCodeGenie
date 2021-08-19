@@ -1,0 +1,48 @@
+<!-- Form Validations using javascript -->
+<html>
+
+<head>
+    <title>JS Form Validation</title>
+    <script type="text/javascript">
+        function validate() {
+            var uname = document.getElementById("uname");
+            var password = document.getElementById("pass");
+
+            // if (uname.value.trim() == "" || password.value.trim() == "") {
+            //     alert("No blank values allowed");
+            //     return false;
+            // } else {
+            //     return true;
+            // }
+            if (uname.value.trim() == "") {
+                // alert("Blank Username");
+                document.getElementById("lbluser").style.visibility = "visible";
+                uname.style.border = "solid 3px red";
+                return false;
+            } else if (password.value.trim() == "") {
+                // alert("Blank Password");
+                document.getElementById("lblpass").style.visibility = "visible";
+                uname.style.border = "solid 3px red";
+                return false;
+            } else if (password.value.trim().length < 5) {
+                alert("Password too short");
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <form onsubmit="return validate()" action="SuccessMessage.html">
+        <input id="uname" placeholder="Username" type="text" />
+        <label id="lbluser" style="color:red; visibility: hidden;">Invalid Username</label><br><br>
+        <input id="pass" placeholder="Password" type="password" />
+        <label id="lblpass" style="color:red; visibility: hidden;">Invalid Password</label><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
