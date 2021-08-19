@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>Counter App</title>
+</head>
+
+<body>
+    <h1>Count:
+        <span></span>
+    </h1>
+    <button class="plusOne">Click Me</button>
+    <script type="text/javascript">
+        // console.log("success");
+        console.log(localStorage.getItem('count'));
+
+        let count = parseInt(localStorage.getItem('count')) || 0;
+        const countEl = document.querySelector('span');
+
+        // access local storage api
+        localStorage.setItem('count', count);
+
+        countEl.textContent = count;
+
+        // fetch the element of plusOne class
+        const plusOneButton = document.querySelector('.plusOne');
+
+        plusOneButton.addEventListener('click', () => {
+            // console.log("plusOne was clicked.");
+            count += 1;
+            countEl.textContent = count;
+            localStorage.setItem('count', count);
+            console.log(parseInt(localStorage.getItem('count')));
+        });
+    </script>
+</body>
+
+</html>

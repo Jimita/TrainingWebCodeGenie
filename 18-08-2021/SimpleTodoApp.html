@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple TODO App</title>
+    <style>
+        .container {
+            margin-left: 30%;
+            width: 40%;
+            text-align: center;
+        }
+        
+        #box {
+            background-color: rgb(240, 233, 235);
+            color: rgb(29, 17, 41);
+            padding: 1%;
+        }
+        
+        #box ul {
+            padding: 4%;
+        }
+        
+        #box li {
+            text-align: left;
+        }
+        
+        #box a {
+            float: right;
+        }
+        
+        .btn {
+            background-color: salmon;
+            color: rgb(7, 4, 7);
+            padding: 2%;
+            width: 20%;
+        }
+        
+        input {
+            padding: 2%;
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>My TODO App</h1>
+        <input type="text" id="name" class="input" placeholder="Enter your Todo Lists..." />
+        <span id="error" style="border: 1 solid red; color: red;"></span><br><br>
+        <input type="button" value="Add" id="btnClick" class="btn" onclick="addMore()" />
+        <ul id="box">
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function addMore() {
+            document.getElementById('error').innerHTML = "";
+            // retrive data
+            let name = document.getElementById('name').value;
+            if (name == '') {
+                document.getElementById('error').innerHTML = "Please Enter Value";
+            } else {
+                let box = document.getElementById('box');
+                let li = document.createElement('li');
+                li.textContent = name;
+                // box.appendChild(li);
+
+                // for remove data
+                let a = document.createElement('a');
+                a.textContent = "X";
+                // when click it will not redirect to anywhere
+                a.href = "javascript:void(0)";
+                li.appendChild(a);
+
+                // get position to add before the first entry
+                let pos = box.firstElementChild;
+                // console.log(pos);
+                if (pos == null) {
+                    box.appendChild(li);
+                } else {
+                    box.insertBefore(li, pos);
+                }
+            }
+            // remove the data from input box
+            document.getElementById('name').value = "";
+        }
+
+
+        // remove the element li from todo list(box)
+        let btn = document.querySelector('ul');
+        // e = it will fetch data/element/value from that click
+        btn.addEventListener('click', function(e) {
+            // remove element
+            let box = document.getElementById('box');
+            let li = e.target.parentNode;
+            // console.log(e.target);
+            box.removeChild(li);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<!-- crud operation -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+        .container {
+            margin-left: 25%;
+            width: 40%;
+            text-align: center;
+        }
+        
+        .btn-success {
+            background-color: rgb(103, 240, 90);
+            color: rgb(7, 4, 7);
+            padding: 2%;
+            width: 20%;
+        }
+        
+        #deleteallbtn {
+            background-color: rgb(219, 56, 56);
+            color: rgb(7, 4, 7);
+            padding: 2%;
+            width: 20%;
+        }
+        
+        input {
+            padding: 2%;
+            width: 50%;
+        }
+        
+        table {
+            background-color: rgb(224, 224, 220);
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 200%;
+            /* margin-left: 20%; */
+        }
+        
+        table td th {
+            border: 1px solid #ddd;
+            padding: 3px;
+        }
+        
+        table th {
+            padding-left: 12px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #010e09;
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>My Todo List Application</h1>
+        <div style="width: 100%; display: table;">
+            <div style="display: table-row; height: 100px;">
+                <div style="width: 70%; display: table-cell; background: rgb(221, 233, 221);">
+                    <input type="text" class="form-control" placeholder="Enter your task" id="addtaskinput" />
+                    <span id="error" style="border: 1 solid red; color: red;"></span><br><br>
+                    <input type="hidden" id="saveindex">
+
+                    <button type="button" class="btn-success" id="addtaskbtn">Add Task</button>
+                    <button type="button" class="btn-success" id="savetaskbtn" style="display: none;">Save Task</button>
+                    <button type="button" id="deleteallbtn" class="btn btn-danger"> Delete All </button>
+                </div>&nbsp;&nbsp;
+                <div style="display: table-cell; background: rgb(248, 248, 250);">
+                    <table class="table" id="addedtasklist"></table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        showtask();
+        // get the input element
+        let addtaskinput = document.getElementById("addtaskinput");
+        // get the btn click to run its function(event)
+        let addtaskbtn = document.getElementById("addtaskbtn");
+
+        addtaskbtn.addEventListener("click", function() {
+            // get value of input field
+            addtaskinputval = addtaskinput.value;
+
+            if (addtaskinputval.trim() != 0) {
+                // get value from local storage
+                let localVal = localStorage.getItem("localtask");
+                if (localVal == null) {
+                    // object will be created(taskObj) and convert to array
+                    taskObj = [];
+                } else {
+                    // localVal(string to obj) to use it in method processing
+                    taskObj = JSON.parse(localVal);
+                }
+                // add new value to array(taskObj)
+                taskObj.push(addtaskinputval);
+                // add/set/store value to local storage as a string only
+                localStorage.setItem("localtask", JSON.stringify(taskObj));
+            } else {
+                document.getElementById('error').innerHTML = "Please Enter your TODO task";
+            }
+            showtask();
+        });
+
+        function showtask() {
+            let localVal = localStorage.getItem("localtask");
+            if (localVal == null) {
+                taskObj = [];
+            } else {
+                taskObj = JSON.parse(localVal);
+            }
+            // display in html table as blank string
+            let htmlDisplay = '';
+            // get html table from its id(addedtasklist)
+            let addedtasklist = document.getElementById("addedtasklist");
+            // array(taskObj) apply foreach to repeat tr tag of table
+            taskObj.forEach((item, index) => {
+                htmlDisplay += `<tr>
+                    <th>${index+1}</th>
+                    <td>${item}</td>
+                    <td><button type="button"style="background-color:blue; padding:7%; width:90%; color:white" onclick="edittask(${index})">✎</button></td>
+                    <td><button type="button" style="background-color:red; padding:9%; width:100%; color:white" onclick="deleteitem(${index})">X</button></td>
+                    </tr>`;
+            });
+            addedtasklist.innerHTML = htmlDisplay;
+            document.getElementById("addtaskinput").value = "";
+        }
+        // edit task
+        function edittask(index) {
+            // get addtask/savetask
+            let saveindex = document.getElementById("saveindex");
+            let addtaskbtn = document.getElementById("addtaskbtn");
+            let savetaskbtn = document.getElementById("savetaskbtn");
+            // set the index value in input hidden field through id(saveindex)
+            saveindex.value = index;
+            // get data from local storage for editing
+            let localVal = localStorage.getItem("localtask");
+            let taskObj = JSON.parse(localVal);
+            // get the text box value = local storage(index) to get value
+            addtaskinput.value = taskObj[index];
+            // hide addtaskbtn and show savetaskbtn
+            addtaskbtn.style.display = "none";
+            savetaskbtn.style.display = "block";
+        }
+        // savetask
+        let savetaskbtn = document.getElementById("savetaskbtn");
+        savetaskbtn.addEventListener("click", function() {
+            let addtaskbtn = document.getElementById("addtaskbtn");
+            // get data from local storage for editing
+            let localVal = localStorage.getItem("localtask");
+            let taskObj = JSON.parse(localVal);
+            let saveindex = document.getElementById("saveindex").value;
+            taskObj[saveindex] = addtaskinput.value;
+            // input value hide
+            savetaskbtn.style.display = "none";
+            addtaskbtn.style.display = "block";
+            // add/set/store value to local storage as a string only
+            localStorage.setItem("localtask", JSON.stringify(taskObj));
+            addtaskinput.value = '';
+            showtask();
+        });
+        // delete item
+        function deleteitem(index) {
+            console.log(index);
+            // get data from local storage for deleting
+            let localVal = localStorage.getItem("localtask");
+            let taskObj = JSON.parse(localVal);
+            // splice(if we know the index from an array then we can use spice to remove it) the array(taskObj)
+            taskObj.splice(index, 1);
+            localStorage.setItem("localtask", JSON.stringify(taskObj));
+            showtask();
+        }
+        // delete all items
+        let deleteallbtn = document.getElementById("deleteallbtn");
+        deleteallbtn.addEventListener("click", function() {
+            let savetaskbtn = document.getElementById("savetaskbtn");
+            let addtaskbtn = document.getElementById("addtaskbtn");
+            // get data from local storage for deleting
+            let localVal = localStorage.getItem("localtask");
+            let taskObj = JSON.parse(localVal);
+            if (localVal == null) {
+                taskObj = [];
+            } else {
+                taskObj = JSON.parse(localVal);
+                taskObj = [];
+            }
+            savetaskbtn.style.display = "none";
+            addtaskbtn.style.display = "block";
+            localStorage.setItem("localtask", JSON.stringify(taskObj));
+            showtask();
+
+        });
+    </script>
+</body>
+
+</html>
