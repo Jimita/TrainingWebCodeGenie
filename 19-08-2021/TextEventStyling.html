@@ -1,0 +1,57 @@
+<!-- create a div tag, print simple text,using events apply css styling in different content -->
+<html>
+
+<head>
+    <title>TextEventStyling</title>
+</head>
+
+<body>
+    <div>
+        <h1>Content 1</h1>
+        <p id="para1">Hey I am Node js developer......</p><br><br>
+        <h1>Content 2</h1>
+        <h2 id="para2">Hey I am Angular js developer</h2><br><br>
+        <h1>Content 3</h1>
+        <p id="para3">Hey I am Vue js developer</p><br><br>
+    </div>
+    <script type="text/javascript">
+        let para1 = document.getElementById("para1");
+        let para2 = document.getElementById("para2");
+        let para3 = document.getElementById("para3");
+        para1.addEventListener("mouseup", function() {
+            // console.log("para1");
+            para1.style.color = 'red';
+            para1.style.fontSize = "larger";
+            para1.style.backgroundColor = "black";
+            para1.style.width = "300px";
+            para1.style.padding = "15px";
+        });
+        para1.addEventListener("mouseout", function() {
+            para1.style = "none"
+        });
+        para2.addEventListener("mouseover", function() {
+            para2.style.color = 'blue';
+            para2.style.fontSize = "small";
+            para2.style.backgroundColor = "yellow";
+            para2.style.width = "400px";
+            para2.style.padding = "15px";
+        });
+        para2.addEventListener("mouseout", function() {
+            para2.style = "none"
+        });
+        para3.addEventListener("mouseover", function() {
+            para3.style.color = 'purple';
+            para3.style.fontSize = "large";
+            para3.style.backgroundColor = "pink";
+            para3.style.width = "400px";
+            para3.style.padding = "50px";
+            para3.style.borderRadius = "50%";
+            para3.style.textAlign = "center";
+        });
+        para3.addEventListener("mouseout", function() {
+            para3.style = "none"
+        });
+    </script>
+</body>
+
+</html>

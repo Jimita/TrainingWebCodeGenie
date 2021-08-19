@@ -1,0 +1,98 @@
+<!-- Color Picker value will be apply to Div Style -->
+<html>
+
+<head>
+    <title>Color Picker</title>
+    <style>
+        .container {
+            margin-left: 20%;
+            padding: 10%;
+            background-color: rgb(252, 144, 144);
+            width: 500px;
+            height: 250px;
+        }
+        
+        .box {
+            padding: 10%;
+            background-color: black;
+            width: 400px;
+            height: 150px;
+            color: blanchedalmond;
+        }
+        
+        button {
+            padding: 3%;
+            padding-bottom: 5%;
+            height: 1%;
+            width: 19%;
+            text-align: center;
+            border-color: rgb(0, 0, 0);
+        }
+        
+        #red {
+            background-color: red;
+        }
+        
+        #green {
+            background-color: green;
+        }
+        
+        #blue {
+            background-color: blue;
+        }
+        
+        #yellow {
+            background-color: yellow;
+        }
+        
+        #orange {
+            background-color: rgb(230, 30, 16);
+        }
+        
+        #reset {
+            background-color: gray;
+            margin-left: 40%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">My Color Picker</h1>
+    <div class="container">
+        <div class="box">
+            <h3 id="color">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio inventore amet velit tenetur r erum reprehenderit libero dolorem voluptas aperiam non ea sunt facere suscipit deserunt voluptatem quasi, dicta, iusto similique?
+            </h3>
+        </div><br>
+        <div class="Buttons">
+            <button id="red">Red</button>
+            <button id="green">Green</button>
+            <button id="blue">Blue</button>
+            <button id="yellow">Yellow</button>
+            <button id="orange">Orange</button><br><br>
+            <button id="reset">Reset</button>
+        </div>
+        <script type="text/javascript">
+            let colorPicker = document.getElementById("color");
+            // let red = document.getElementById("red");
+            red.addEventListener("click", function() {
+                colorPicker.style.color = "red";
+            });
+            green.addEventListener("click", function() {
+                colorPicker.style.color = "green";
+            });
+            blue.addEventListener("click", function() {
+                colorPicker.style.color = "blue";
+            });
+            yellow.addEventListener("click", function() {
+                colorPicker.style.color = "yellow";
+            });
+            orange.addEventListener("click", function() {
+                colorPicker.style.color = "orange";
+            });
+            reset.addEventListener("click", function() {
+                colorPicker.style.color = "white";
+            });
+        </script>
+</body>
+
+</html>

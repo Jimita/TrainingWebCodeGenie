@@ -1,0 +1,26 @@
+<!-- Timer start and stop -->
+<html>
+
+<head>
+    <title>Timer</title>
+</head>
+
+<body>
+    <h1 id="example"></h1>
+
+    <button onclick="clearInterval(clock)">Stop</button> <br>
+    <script type="text/javascript">
+        var startbutton = document.getElementById("startbutton");
+        // var stopbutton = document.getElementById("stopbutton");
+        var example = document.getElementById("example");
+
+        var clock = setInterval(exampleTimer, 1000);
+
+        function exampleTimer() {
+            var d = new Date();
+            document.getElementById("example").innerHTML = d.toLocaleTimeString();
+        }
+    </script>
+</body>
+
+</html>

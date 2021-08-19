@@ -1,0 +1,234 @@
+<!--Take Textbox, create Form with 10 Textbox using Mouse Design/events/form events  -->
+<!-- Events : input, submit,
+              change(hit tab), focus, blur,
+              click, mousedown, mouseup,
+              keydown, keyup, keypress
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Events</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: whitesmoke;
+        }
+        
+        .box {
+            background-color: rgb(185, 212, 185);
+            width: 500px;
+            height: 850px;
+            margin-left: 30%;
+        }
+        
+        header {
+            padding: 1rem 2rem;
+        }
+        
+        h1 {
+            color: rgb(19, 6, 192);
+            text-align: center;
+        }
+        
+        form>p {
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            box-sizing: border-box;
+        }
+        
+        label {
+            font-size: 1rem;
+            flex-basis: 30%;
+            padding: 0.25rem 1px;
+            text-align: start;
+        }
+        
+        input {
+            font-size: 1rem;
+            flex-basis: 100%;
+            width: calc(100% - 2px);
+            padding: 0.25rem 1rem;
+        }
+        
+        select,
+        option {
+            font-size: 1rem;
+            flex-basis: 100%;
+            width: calc(100% - 2px);
+            padding: 0.25rem 1rem;
+        }
+        
+        button {
+            border: none;
+            background-color: cornflowerblue;
+            color: #fff;
+            flex-basis: 100%;
+            width: calc(100% - 2px);
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+        }
+        
+        button:focus {
+            background-color: lemonchiffon;
+        }
+        /* input[type='submit']:focus{
+        background-color:cornflowerblue;
+      } */
+    </style>
+</head>
+
+<body><br><br>
+    <main class="box">
+        <form name="sampleForm" action="#" method="POST">
+            <h1>Event Form</h1>
+            <p>
+                <label for="fname">Firstname</label>
+                <input type="text" id="fname" placeholder="Enter FirstName" value="" maxlength="50" autocomplete="off" />
+            </p>
+            <p>
+                <label for="lname">Lastname</label>
+                <input type="text" id="lname" placeholder="Enter LirstName" value="" maxlength="50" autocomplete="off" />
+            </p>
+            <p>
+                <label for="name">Username</label>
+                <input type="text" id="name" placeholder="Enter UserName" value="" maxlength="50" autocomplete="off" />
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" inputmode="email" id="email" placeholder="Enter Email" autocomplete="off" />
+            </p>
+            <p>
+                <label for="phone">Phone No.</label>
+                <input type="tel" inputmode="tel" id="phone" placeholder="Enter Phone No." autocomplete="off" />
+            </p>
+            <p>
+                <label for="pass">Password</label>
+                <input type="password" id="pass" placeholder="Password Please" autocomplete="off" />
+            </p>
+            <p>
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Password Age" autocomplete="off" />
+            </p>
+
+            <p>
+                <label for="lang">Language</label>
+                <select id="lang">
+            <option value="en" lang="en">English</option>
+            <option value="hi" lang="hi" selected>Hindi</option>
+            <option value="gu" lang="gu">Gujarati</option>
+            <option value="fe" lang="fe">France</option>
+            <option value="ge" lang="ge">erman</option>
+            <option value="fr" lang="fr">Français</option>
+          </select>
+            </p>
+            <p>
+                <button id="btnSend">Send</button>
+            </p>
+        </form>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            //add event listeners to form elements
+            //fname lname name email phone pass age lang btnSend
+            let fname = document.getElementById('fname');
+            let lname = document.getElementById('lname');
+            let name = document.getElementById('name');
+            let email = document.getElementById('email');
+            let phone = document.getElementById('phone');
+            let pass = document.getElementById('pass');
+            let age = document.getElementById('age');
+            let lang = document.getElementById('lang');
+            let btn = document.getElementById('btnSend');
+            let form = document.sampleForm;
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FNAME XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            fname.addEventListener('focus', handleFocus);
+            fname.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX LNAME XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            lname.addEventListener('focus', handleFocus);
+            lname.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  NAME XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            name.addEventListener('change', handleChange);
+            name.addEventListener('input', handleInput);
+            //input: better for validation than change in most cases
+            name.addEventListener('keypress', handleKey);
+            name.addEventListener('keydown', handleKey);
+            name.addEventListener('keyup', handleKey);
+            name.addEventListener('focus', handleFocus);
+            name.addEventListener('blur', handleBlur);
+            //blur: used to be used like placeholder
+            //blur or change: can be used for validation when pattern needed
+            name.addEventListener('click', handleMouse);
+            name.addEventListener('mousedown', handleMouse);
+            name.addEventListener('mouseup', handleMouse);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX EMAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            email.addEventListener('focus', handleFocus);
+            email.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PHONE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            phone.addEventListener('focus', handleFocus);
+            phone.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX PASS XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            pass.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Age XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            age.addEventListener('focus', handleFocus);
+            age.addEventListener('blur', handleBlur);
+            // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX LANG XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            lang.addEventListener('change', handleChange);
+            lang.addEventListener('input', handleInput);
+
+            //handle form submission
+            form.addEventListener('submit', handleSend);
+            btn.addEventListener('click', handleSend);
+            //even with enter key
+            document.addEventListener('keypress', (ev) => {
+                console.log({
+                    ev
+                });
+            });
+        });
+
+        function handleChange(ev) {
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleInput(ev) {
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleFocus(ev) {
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleBlur(ev) {
+            console.log("BLUR, key and its value");
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleMouse(ev) {
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleKey(ev) {
+            console.log("Your key is up");
+            console.log(ev.type.toUpperCase(), ev.target.id, ev.target.value);
+        }
+
+        function handleSend(ev) {
+            ev.preventDefault();
+            //stop the form from submitting and reloading the page
+            console.log(ev.type.toUpperCase(), 'Submitting the Form');
+        }
+    </script>
+</body>
+
+</html>
