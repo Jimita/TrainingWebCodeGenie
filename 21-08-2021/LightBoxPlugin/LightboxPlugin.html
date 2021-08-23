@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox Plugin</title>
+    <!-- adding cdn  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-k2GFCTbp9rQU412BStrcD/rlwv1PYec9SNrkbQlo6RZCf75l6KcC3UwDY8H5n5hl4v77IDtIPwOk9Dqjs/mMBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css" integrity="sha512-Woz+DqWYJ51bpVk5Fv0yES/edIMXjj3Ynda+KWTIkGoynAMHrqTcDUQltbipuiaD5ymEo9520lyoVOo9jCQOCA==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <script>
+        $(document).ready(function() {
+            $("#main a").lightBox();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="main">
+        <a href="https://st2.depositphotos.com/1141099/6198/i/600/depositphotos_61983329-stock-photo-historic-charminar.jpg">
+            <img src="https://st2.depositphotos.com/1141099/6198/i/600/depositphotos_61983329-stock-photo-historic-charminar.jpg" />
+        </a>
+        <a href="">
+            <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aW5kaWF8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" />
+        </a>
+        <a href="">
+            <img src="" />
+        </a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<!-- https://www.jqueryscript.net/lightbox/slider-popup-lightbox.html -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Popup Lightbox Plugin</title>
+    <!--jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Animate CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet" />
+    <!--Popup Lightbox Js-->
+    <script src="js/jquery.popup.lightbox.js"></script>
+    <!--Popup Lightbox CSS-->
+    <link href="css/popup-lightbox.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #fafafa;
+        }
+        
+        .container {
+            margin: 150px auto;
+            max-width: 960px;
+            text-align: center;
+        }
+        
+        .img-container {
+            margin: 20px;
+        }
+        
+        .img-container img {
+            width: 200px;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            transition: .3s;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+        }
+        
+        .img-container img:hover {
+            transform: scale(0.97);
+            -webkit-transform: scale(0.97);
+            -moz-transform: scale(0.97);
+            -o-transform: scale(0.97);
+            opacity: 0.75;
+            -webkit-opacity: 0.75;
+            -moz-opacity: 0.75;
+            transition: .3s;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+
+            $(".img-container").popupLightbox({
+                width: 600,
+                height: 450
+            });
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gallery</h1>
+        <div class="jquery-script-ads" style="margin:30px auto">
+
+            <script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+        </div>
+        <div class="img-container">
+            <img src="https://source.unsplash.com/600x450/?fitness" alt="Fitness" />
+            <img src="https://source.unsplash.com/600x450/?toy" alt="jQueryScript.Net" />
+            <img src="https://source.unsplash.com/600x450/?girl" alt="Girls" />
+            <img src="https://source.unsplash.com/600x450/?fashion" alt="Fashion" />
+
+            <img src="https://source.unsplash.com/600x450/?nature" alt="nature" />
+            <img src="https://source.unsplash.com/600x450/?cars" alt="jQueryScript.Net" />
+            <img src="https://source.unsplash.com/600x450/?film" alt="film" />
+            <img src="https://source.unsplash.com/600x450/?event" alt="event" />
+        </div>
+    </div>
+</body>
+
+
+</html>
