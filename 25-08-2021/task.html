@@ -1,0 +1,43 @@
+<html>
+<!-- <script>
+        obj = Calc(10).add(5).mult(2).div(3).sub(2);
+        alert(obj); //8
+</script> -->
+
+<head>
+    <title>Practice Task</title>
+    <script type="text/javascript">
+        var obj = function() {
+            this.i = 10;
+            this.add = function(i) {
+                this.i += i;
+                return this;
+            };
+            this.mul = function(i) {
+                this.i *= i;
+                return this;
+            };
+            this.div = function(i) {
+                this.i /= i;
+                return this;
+            };
+            this.sub = function(i) {
+                this.i -= i;
+                return this;
+            };
+            this.print = function() {
+                alert(this.i);
+                console.log(this.i);
+            };
+        };
+        var ans = new obj();
+        ans.add(5).mul(2).div(3).sub(2).print();
+        // ans.add(5);
+        // ans.mul(2);
+        // ans.div(3);
+        // ans.sub(2);
+        // ans.print();
+    </script>
+</head>
+
+</html>
