@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<!-- https://sweetalert.js.org/guides/#getting-started -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Sweet Alert</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        .sweetAlert button {
+            float: left;
+            background-color: #000000;
+            color: white;
+            border: none;
+            box-shadow: none;
+            font-size: 17px;
+            font-weight: 500;
+            font-weight: 600;
+            border-radius: 3px;
+            padding: 15px 35px;
+            margin: 26px 5px 0 5px;
+            cursor: pointer;
+        }
+        
+        .sweetAlert button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="sweetAlert">
+        <button id="btn1">My basic message</button>
+        <button id="btn2">Confirm message</button>
+        <button id="btn3">Delete Message</button>
+        <button id="btn4">Custom Icon Message </button>
+    </div>
+    <script>
+        document.getElementById('btn1').onclick = function() {
+            swal("Hello, Jimita Gandhi!");
+        };
+
+        document.getElementById('btn2').onclick = function() {
+            swal("Do you want to delete this item ?")
+                .then((value) => {
+                    swal(`The item is deleted successfully: ${value}`);
+                });
+        };
+
+        document.getElementById('btn3').onclick = function() {
+            swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Your imaginary file is safe!");
+                    }
+                });
+        };
+
+
+        document.getElementById('btn4').onclick = function() {
+            swal({
+                title: "Sweet!",
+                text: "Here's a custom image.",
+                imageUrl: 'https://i.imgur.com/4NZ6uLY.jpg'
+            });
+        };
+    </script>
+</body>
+
+</html>
