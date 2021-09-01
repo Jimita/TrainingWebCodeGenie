@@ -1,0 +1,95 @@
+<html lang="en">
+<!-- https://jsonplaceholder.typicode.com/posts -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Json API data Display</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js">
+    </script>
+
+    <style>
+        table {
+            margin: 0 auto;
+            font-size: large;
+            border: 1px solid black;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #020202;
+            font-size: xx-large;
+            font-family: 'Gill Sans', 'Gill Sans MT', ' Calibri', 'Trebuchet MS', 'sans-serif';
+        }
+        
+        td {
+            background-color: #e4d9d9;
+            border: 1px solid black;
+        }
+        
+        th {
+            background-color: #000000;
+            color: blanchedalmond;
+        }
+        
+        th,
+        td {
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        td {
+            font-weight: lighter;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>Json Data</h1>
+
+        <!-- TABLE CONSTRUCTION-->
+        <table id='table'>
+            <!-- HEADING FORMATION -->
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+            </tr>
+
+            <script>
+                $(document).ready(function() {
+
+                    // FETCHING DATA FROM JSON FILE
+                    $.getJSON("https://jsonplaceholder.typicode.com/posts",
+                        function(data) {
+                            var user = '';
+
+                            // ITERATING THROUGH ALL THE OBJECTS IN ARRAY
+                            $.each(data, function(key, value) {
+
+                                //CONSTRUCTION OF ROWS HAVING
+                                // DATA FROM JSON OBJECT
+                                user += '<tr>';
+                                user += '<td>' +
+                                    value.id + '</td>';
+
+                                user += '<td>' +
+                                    value.title + '</td>';
+
+                                user += '<td>' +
+                                    value.body + '</td>';
+
+                            });
+
+                            //INSERTING ROWS INTO TABLE (The append() method is used to append the string containing rows in the table.)
+                            $('#table').append(user);
+                        });
+                });
+            </script>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!-- Render html dynamically usin ajax js -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html rendering using ajax</title>
+</head>
+<style>
+    .fruits li {
+        font-weight: bold;
+        color: red;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <h1>Hello, My fruits bucket</h1>
+    <div id="container"></div>
+    <script>
+        const xhr = new XMLHttpRequest();
+        const container = document.getElementById('container');
+
+        // response comes back
+        xhr.onload = function() {
+            if (this.status === 200) {
+                container.innerHTML = xhr.responseText;
+            } else {
+                console.warn('Did not recived 200 OK from response!');
+            }
+        };
+        xhr.open('get', 'FruitList.html');
+        xhr.send();
+    </script>
+</body>
+
+</html>
