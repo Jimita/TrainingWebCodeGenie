@@ -1,0 +1,163 @@
+
+{{!-- {{user_array}}
+{{user_array.user_name}}
+{{user_array.user_gender}}
+{{user_array.user_dob}}
+{{user_array.user_mobile}}
+{{user_array.user_email}}
+{{user_array.user_password}}
+{{user_array.user_isadmin}} --}}
+ 
+<html>
+<body>
+ 	<div class="ban-top">
+		<div class="container">
+			<div class="top_nav_left">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+							    aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav menu__list">
+								<li>
+									<a class="nav-stylehead" href="/home">Home
+										<span class="sr-only">(current)</span>
+									</a>
+								</li>
+								<li class="">
+									<a class="nav-stylehead" href="about.html">About Us</a>
+								</li>
+								<li class="dropdown">
+									{{!-- <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kitchen
+										<span class="caret"></span>
+									</a> --}}
+									<ul class="dropdown-menu multi-column columns-3">
+										<div class="agile_inner_drop_nav_info">
+											<div class="col-sm-4 multi-gd-img">
+												<ul class="multi-column-dropdown">
+												</ul>
+											</div>
+											<div class="col-sm-4 multi-gd-img">
+												<ul class="multi-column-dropdown">
+												
+												</ul>
+											</div>
+											<div class="col-sm-4 multi-gd-img">
+												<img src="images/nav.png" alt="">
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</ul>
+								</li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu multi-column columns-3">
+										<div class="agile_inner_drop_nav_info">
+											<div class="col-sm-6 multi-gd-img">
+												<ul class="multi-column-dropdown">
+													<li>
+														<a href="product2.html">Furniture</a>
+													</li>
+													<li>
+														<a href="product2.html">Stationary</a>
+													</li>
+												</ul>
+											</div>
+											<div class="col-sm-6 multi-gd-img">
+												<ul class="multi-column-dropdown">
+													<li>
+														<a href="product2.html">Electronics</a>
+													</li>
+													<li>
+														<a href="product2.html">Books</a>
+													</li>
+												</ul>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</ul>
+								</li>
+								{{!-- <li>
+									<a class="nav-stylehead" href="faqs.html">Faqs</a>
+								</li> --}}
+								<li class="dropdown">
+									<a class="nav-stylehead dropdown-toggle" href="#" data-toggle="dropdown">Profile
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu agile_short_dropdown">
+										{{!-- <li>
+											<a href="/user_details_display/{{myid}}">My Profile</a>
+										</li> --}}
+                                        <li>
+											<a href="/change_password">Change Password</a>
+										</li>
+										<li>
+											<a href="/logout">logout</a>
+										</li>
+									</ul>
+								</li>
+								{{!-- <li>
+									<a class="" href="contact.html">Contact</a>
+								</li> --}}
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- //navigation -->
+	<div>
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-body modal-body-sub_agile">
+					<div class="main-mailposi">
+						<span class="fa fa-envelope-o" aria-hidden="true"></span>
+					</div>
+					<div class="modal_body_left modal_body_left1">
+						<h3 class="agileinfo_sign">Profile Details </h3>
+                        <br>
+				
+							<div class="styled-input agile-styled-input-top">
+                                <label>Name : {{user_array.user_name}}</label>
+							</div><hr>
+                            <div class="styled-input agile-styled-input-top">
+                                <label>Email : {{user_array.user_email}}</label>
+							</div><hr>
+                              <div class="styled-input agile-styled-input-top">
+                                <label>BirthDate : {{user_array.user_dob}}</label>
+							</div><hr>
+                              <div class="styled-input agile-styled-input-top">
+                                <label>Gender : {{user_array.user_gender}}</label>
+							</div><hr>
+							  <div class="styled-input agile-styled-input-top">
+                                <label>Mobile : {{user_array.user_mobile}}</label>
+							</div><hr>
+						<a href="/edit_form/{{user_array._id}}"  style="margin-left: 45%;">Want to change your profile details ?</a>
+
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+		</div>
+	</div>
+</body>
+
+</html>
