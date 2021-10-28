@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var { check, validationResult } = require('express-validator');
+// https://flaviocopes.com/express-validate-input/
+
 
 var UsersModel=require('../model/usermodel');
 var AdminModel = require('../model/admin');
@@ -20,36 +23,105 @@ router.get('/get-users-api',function(req,res,next){
   });
 });
 /*Get single data by id */
-router.get('/get-users-details-api/:id',function(req,res,next){
-  UsersModel.findById(req.params.id,function(err,mydata){
-    if(err){
-      res.send(JSON.stringify({"flag":0,"message":"Error","err":err}));
-    }else{
-      res.send(JSON.stringify({"flag":1,"message":"data listing","data":mydata}));
-      render("")
+// router.get('/get-users-details-api/:id',function(req,res,next){
+//   UsersModel.findById(req.params.id,function(err,mydata){
+//     if(err){
+//       res.send(JSON.stringify({"flag":0,"message":"Error","err":err}));
+//     }else{
+//       res.send(JSON.stringify({"flag":1,"message":"data listing","data":mydata}));
+//       // render("")
+//     }
+//   });
+// });
+
+// router.get('/add-users-api', function(req, res, next) {
+//   res.render("/add-users-api");
+// });
+//add all data
+
+
+
+router.post('/add-users-api',
+[
+    check('name', 'Name should be more than 4 charachters').isLength({ min: 4 }).trim().escape(),
+    check('email', 'Email should be more than 10 charachters').isLength({ min: 10 }).normalizeEmail().custom((value, {req}) => {
+      return new Promise((resolve, reject) => {
+        UsersModel.findOne({email:req.body.email}, function(err, user){
+          if(err) { 
+             reject(new Error('server Error'))
+          }
+          if(Boolean(user)) {
+            reject(new Error('Email already in use..'))
+          }
+           resolve(true)
+        })
+      })
+    }),
+    check('password', 'Password must have : Min 1 uppercase letter, Min 1 lowercase letter, Min 1 special character, Min 1 number, Min 8 characters, Max 10 characters.')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,10}$/)
+],
+ function(req,res,next){
+  var errors = validationResult(req).array();
+  if (errors.length) {
+    let er = {};
+    for (let err of errors) {
+      if (er[err.param]) {
+        er[err.param].push(err.msg);
+      } else {
+        er[err.param] = [];
+        er[err.param].push(err.msg);
+      }
     }
-  });
+    console.log("my error is : ",er); 
+    res.send(JSON.stringify({"flag":0,"message":"Error in api ","myerrors":er}));
+  }else {
+    const mybodydata = {
+      name : req.body.name,
+      email : req.body.email,
+      password : req.body.password
+    }
+  // console.log("my body data is : ", mybodydata);
+    var data = UsersModel(mybodydata);
+    data.save(function(err){
+      if(err){
+        res.send(JSON.stringify({"flag":0,"message":"Server Error in api ","err":err}));
+      }else{
+        res.send(JSON.stringify({"flag":1,"message":"record added..."}));
+      }
+    })
+  }
+});
+  
+//Login user Process  Method
+router.post('/user-login-api', function (req, res, next) {
+  var email = req.body.email;
+  var password = req.body.password;
+  console.log(req.body);
+  UsersModel.findOne({ "email": email }, function (err, db_users_array) {
+    console.log("Find One " + db_users_array);
+
+    if (db_users_array) {
+      var db_email = db_users_array.email;
+      var db_password = db_users_array.password;
+    }
+    console.log("db_email " + db_email);
+    console.log("db_password " + db_password);
+
+    if (db_email == null) {
+      console.log("If");
+      res.send(JSON.stringify({"flag":0,"message":"Email not Found api."}));
+    }
+    else if (db_email == email && db_password == password) {    
+      // req.session.email = db_email;
+      res.send(JSON.stringify({"flag":1,"message":"You Have Logged In Successfully..."}));
+    }
+    else {
+      res.send(JSON.stringify({"flag":0,"message":"Login Invalid...."}));
+      console.log("Credentials wrong");
+    }
+ });
 });
 
-router.get('/add-users-api', function(req, res, next) {
-  res.render("/add-users-api");
-});
-//add all data
-router.post('/add-users-api',function(req,res,next){
-  console.log(req.body);
-  const mybodydata ={
-    user_name:req.body.user_name,
-    user_email:req.body.user_email
-  }
-  var data =UsersModel(mybodydata);
-  data.save(function(err){
-    if(err){
-      res.send(JSON.stringify({"flag":0,"message":"Error in api ","err":err}));
-    }else{
-      res.send(JSON.stringify({"flag":1,"message":"record added"}));
-    }
-  })
-});
 
 //delete data  by id
 router.delete('/delete-users-api', function(req, res, next) {
@@ -298,15 +370,15 @@ async function main(){
   let transporter = nodemailer.createTransport({
     service: 'gmail', // true for 465, false for other ports
     auth: {
-      user: 'testfor.dhanvigajjar@gmail.com',
-      pass: 'Dhanvi@13'
+      user: 'test.jimita@gmail.com',
+      pass: 'Jimita@49'
     }
   });
 
   // setup email data with unicode symbols
   let mailOptions = {
-    from: 'testfor.dhanvigajjar@gmail.com', // sender address
-    to: 'gajjardhanvi456@gmail.com', // list of receivers
+    from: 'test.jimita@gmail.com', // sender address
+    to: 'jimita4gandhi@gmail.com', // list of receivers
     subject: "Forgot Password", // Subject line
     text: "Hello your password is "  + db_password, // plain text body
     html: "Hello your password is "  + db_password // html body

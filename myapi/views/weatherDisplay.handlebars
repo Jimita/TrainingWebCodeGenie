@@ -1,0 +1,64 @@
+{{!-- <html>
+    <body>
+        <h1>Weather Details</h1>
+        <hr>
+        <h2>{{mydata.name}}</h2>
+       {{#each mydata}}
+       <p>{{temp}}</p>
+       <p>{{temp_min}}</p>
+       <p>{{temp_max}}</p>
+       {{/each}}
+    </body>
+</html> --}}
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .card { box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; width:
+      40%; } .card:hover { box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); }
+      .container { padding: 2px 16px; }
+    </style>
+  </head>
+  <body>
+
+    <h2>City : {{mydata.name}}, Country : {{mydata.sys.country}}</h2>
+    <hr>
+<br>
+    <div class="card"><br>
+      <div class="container">
+        <h4>Temperature : </h4>
+        {{#each mydata}}
+          <b>{{temp}}</b>
+        {{/each}}
+      </div><br><hr>
+      <div class="container">
+        <h4>Minimum Temperature : </h4>
+        {{#each mydata}}
+          <b>{{temp_min}}</b>
+        {{/each}}
+      </div><br><hr>
+      <div class="container">
+        <h4>Maximum Temperature : </h4>
+        {{#each mydata}}
+          <b>{{temp_max}}</b>
+        {{/each}}
+      </div><br><hr>
+        <div class="container">
+        <h4>Humidity : </h4>
+        {{#each mydata}}
+          <b>{{humidity}}</b>
+        {{/each}}
+      </div><br><hr>
+        <div class="container">
+        <h4>Wind Speed (speed/deg): </h4>
+        {{#each mydata}}
+          <b>{{speed}}</b>
+          <b style="color: red;">{{deg}}</b>
+        {{/each}}
+      </div><br><hr>
+    </div>
+
+  </body>
+</html>

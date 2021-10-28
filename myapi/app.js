@@ -2,16 +2,20 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+// var bodyParser = require('body-parser');
 var logger = require('morgan');
 var exphbs =require('express-handlebars');
 var mongoose = require('mongoose');
 var exphbs =require('express-handlebars');
 var session = require('express-session');
 const fileUpload = require('express-fileupload');
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var userApiRouter = require('./routes/userApi');
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://adminPaneldb:adminPaneldb@localhost:27017/adminPaneldb")
@@ -32,6 +36,12 @@ app.set('view engine', 'handlebars');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// // create application/json parser
+// var jsonParser = bodyParser.json()
+ 
+// // create application/x-www-form-urlencoded parser
+// var urlencodedParser = bodyParser.urlencoded({ extended: false })
+ 
 app.use(cookieParser());
 app.use(fileUpload());
 app.use(session({
@@ -44,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/userDetail', userApiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
