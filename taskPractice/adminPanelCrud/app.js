@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 const nodemailer = require("nodemailer");
 var mongoose = require('mongoose');
 const _handlebars = require("handlebars");
@@ -56,7 +56,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
+// app.use(fileUpload());
 app.use(session({
     secret: 'keyboard cat',
     resave: false,

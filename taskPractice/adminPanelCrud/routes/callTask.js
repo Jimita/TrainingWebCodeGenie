@@ -89,3 +89,68 @@ router.get("/increase", function (req, res, next) {
   // var lastVal = inputData.pop();
   // inputData.push(lastVal + 1);
 });
+
+
+// <script>
+// $(document).ready(function(){
+//   $("form").submit(function(event){
+//     var formData = {
+//       fname : $("#fname").val(),
+//       lname : $("#lname").val(),
+//       address : $("#address").val(),
+//       gender : $("#gender:checked").val(),
+//       hobby : $("#hobby:checked").val(),
+//       interestarea : $("#interestarea").val(),
+//       image : $("#image").val()
+//     }
+
+//     // validation
+//     $('form[id="form"]').validate({
+//         rules: {
+//           fname: 'required',
+//           lname: 'required',
+//           address: {
+//             required: true,
+//             minlength: 20,
+//             maxlength:50
+//           },
+//           gender: {
+//             required: true
+//           },
+//           hobby: 'required',
+//           interestarea: 'required',
+//         },
+//         messages: {
+//           fname: 'First Name is required',
+//           lname: 'Last Name is required',
+//           address: {
+//            // lname: 'Last Name is required',
+//             minlength: 'Address must be at least 20 characters long',
+//             maxlength: 'Address must be maximum 50 characters long'
+//           },
+//           gender: 'Gender field is required',
+//           hobby: 'Hobby field is required',
+//           interestarea: 'This field is required',
+
+//         },
+//         submitHandler: function(form) {
+//           form.submit();
+//         }
+//       });
+
+//     event.preventDefault();
+//     console.log("form body data", formData)
+//     // ajax call 
+//     $.ajax({
+//       type: "POST",
+//       url: "http://127.0.0.1:3000/userFormProcess",
+//       data: formData,
+//       dataType: "json",
+//     }).done(function(data){
+//       console.log("data is : ", data);
+//     })
+//   })
+// })
+// </script> 
+
+

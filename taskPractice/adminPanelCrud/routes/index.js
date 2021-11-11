@@ -1,8 +1,21 @@
 var express = require("express");
 var router = express.Router();
+var path = require("path");
+const multer = require("multer");
+// const upload = multer({ dest: './public/uploads' })
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 var userFormModel = require('../models/userForm_table');
-
 
 /* GET index page. */
 router.get("/", function (req, res, next) {
@@ -23,45 +36,45 @@ router.get("/", function (req, res, next) {
 // user form validation task (ajax jquery crud)
 
 router.get("/userForm", function (req, res, next) {
-  // var arr =  [5,2,3]
+  userFormModel.find(function(err,db_user_array) {
+   if(err){
+     console.log(err);
+   }else{
+     res.render("user/form", {user:db_user_array, layout:false});
+   }
+  })
+});
+
+router.post("/userForm",upload.single("image"), function (req, res, next) {
+
+      console.log("files",req.file);
+      const formData = {
+        fname: req.body.fname,
+        lname: req.body.lname,
+        address: req.body.address,
+        gender: req.body.gender,
+        hobby: req.body.hobby,
+        interestarea: req.body.interestarea,
+        image: req.body.image,
+      }
+      console.log("formdata : ", formData);
+      var data = userFormModel(formData);
+    // res.send('ok')
+      data.save(function (err) {
+        if (err) {
+          console.log("Error in Insert Record");
+        } else {
+          res.send(JSON.stringify({"flag":1,"message":"Success","formData":formData}));
+        }
+      });
+
+});
+
+
+module.exports = router;
+
+
+ // var arr =  [5,2,3]
   // for(item of arr){
   //   console.log("arr item", item);
   // }
-  res.render("user/form", { layout: false });
-});
-
-router.post("/userFormProcess", function (req, res, next) {
-  console.log(req.body);
-
-  // var fileobject = req.files.image;
-  // var filename = req.files.image.name;
-  // console.log("filename",filename);
-  
-  const formData = {
-    fname: req.body.fname,
-    lname: req.body.lname,
-    address: req.body.address,
-    gender: req.body.gender,
-    hobby: req.body.hobby,
-    interestarea: req.body.interestarea,
-    // image: filename,
-  }
-  // console.log("formdata : ", formData);
-  var data = userFormModel(formData);
-
-  data.save(function (err) {
-    if (err) {
-      console.log("Error in Insert Record");
-    } else {
-      res.render('user/form');
-
-      // fileobject.mv("public/userFormUploads/" + filename, function (err) {
-      //   if (err) throw err;
-      //   res.send("Data Stored Successfully..");
-      //   // res.redirect("userForm");
-      // });
-    }
-  });
-});
-
-module.exports = router;

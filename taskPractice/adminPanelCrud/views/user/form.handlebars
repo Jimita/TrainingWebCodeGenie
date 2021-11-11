@@ -55,7 +55,10 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
       rel="stylesheet"
     />
-
+   <link
+      rel="stylesheet"
+      href="../../table.css"
+    />
     <script
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
     ></script>
@@ -69,7 +72,7 @@
   <body>
     <br />
     <div class="container">
-      <form method="POST" enctype="multipart/form-data" action="userFormProcess">
+      <form id="formid" method="POST" enctype="multipart/form-data">
         <div class="card card-success">
           <div class="card-header">
             <h3 class="card-title">User Form</h3>
@@ -161,7 +164,7 @@
               <div class="input-group">
                 <span><input
                     type="checkbox"
-                    name="singing"
+                    name="hobby"
                     id="hobby"
                     value="singing"
                   />Singing</span>
@@ -169,7 +172,7 @@
               <div class="input-group">
                 <span><input
                     type="checkbox"
-                    name="dancing"
+                    name="hobby"
                     id="hobby"
                     value="dancing"
                   />Dancing</span>
@@ -177,7 +180,7 @@
               <div class="input-group">
                 <span><input
                     type="checkbox"
-                    name="swimming"
+                    name="hobby"
                     id="hobby"
                     value="swimming"
                   />Swimming</span>
@@ -185,7 +188,7 @@
               <div class="input-group">
                 <span><input
                     type="checkbox"
-                    name="coding"
+                    name="hobby"
                     id="hobby"
                     value="coding"
                   />Coding</span>
@@ -193,7 +196,7 @@
               <div class="input-group">
                 <span><input
                     type="checkbox"
-                    name="other"
+                    name="hobby"
                     id="hobby"
                     value="other"
                   />Other</span>
@@ -213,9 +216,11 @@
                   name="interestarea"
                   id="interestarea"
                 >
-                  <option value="Code">Code</option>
-                  <option value="crafts">Crafts</option>
-                  <option value="mathematics">Mathematics</option>
+                  <option value="Node Js">Node Js</option>
+                  <option value="Java">Java</option>
+                  <option value="Python">Python</option>
+                  <option value="PHP">PHP</option>
+
                 </select>
               </div>
               <!-- /.input group -->
@@ -249,8 +254,32 @@
 
       </form>
     </div>
+<div class="container">
+    <table id="table">
+  
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Gender</th>
+      <th>Action</th>
+    </tr>
+     {{#each user}}
+    <tr>
+      <td><img src="/userFormUploads/{{image}}" style="width: 100px;" /></td>
+      <td>{{fname}}</td>
+      <td>{{address}}</td>
+      <td>{{gender}}</td>
+      <td></td>
+
+    </tr>
+    {{/each}}
+  
+</table>
+</div>
+
     <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous" defer></script>
     <!-- Bootstrap 4 -->
     <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Select2 -->
@@ -282,41 +311,67 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <!-- Page script -->
 
 {{!-- jquery validation and ajax call --}}
     <script>
-        $(document).ready(function(){
-          $("form").submit(function(event){
-            var formData = {
-              fname : $("#fname").val(),
-              lname : $("#lname").val(),
-              address : $("#address").val(),
-              gender : $("#gender:checked").val(),
-              hobby : $("#hobby:checked").val(),
-              interestarea : $("#interestarea").val(),
-              image : $("#image").val()
-            }
-            $(".error-msg").remove();
-            if (formData.fname.length < 1) {  
-              $('#fname').after('<span class="error-msg text-danger">Your FirstName is required</span>');  
-            }  
-            if (formData.lname.length < 1) {  
-              $('#lname').after('<span class="error-msg text-danger">Your LastName is required</span>');  
-            }  
+      $(document).ready(function() {
+        $("#formid").validate({
+          rules: {
+             fname: 'required',
+           lname: 'required',
+           address: {
+             required: true,
+             minlength: 10,
+             maxlength:50
+           },
+           gender: {
+             required: true
+           },
+           hobby: 'required',
+           interestarea: 'required',
+         },
+         messages: {
+           fname: 'First Name is required',
+           lname: 'Last Name is required',
+           address: {
+             lname: 'Last Name is required',
+             minlength: 'Address must be at least 10 characters long',
+             maxlength: 'Address must be maximum 50 characters long'
+           },
+           gender: 'Gender field is required',
+           hobby: 'Hobby field is required',
+           interestarea: 'This field is required',
+          },
+          submitHandler: function(form, event) {
             event.preventDefault();
-            console.log("form body data", formData)
-            // ajax call 
-            $.ajax({
-              type: "POST",
-              url: "http://127.0.0.1:3000/userFormProcess",
-              data: formData,
-              dataType: "json",
-            }).done(function(data){
-              console.log("data : ", data);
-            })
-          })
-        })
+            var hobbyArray =[];
+            $("#formid input:checkbox:checked").each(function(){
+                hobbyArray.push($(this).val()); 
+            });
+            var formData = new FormData();
+            formData.append('fname', $("#fname").val());
+            formData.append('lname', $("#lname").val());
+            formData.append('address', $("#address").val());
+            formData.append('gender', $("#gender").val());
+            formData.append('hobby', hobbyArray);
+            formData.append('interestarea', $("#interestarea").val());
+           // formData.append('image', $('#image')[0].files[0].name);
+
+          // ajax call 
+              $.ajax({
+                  type: "POST",
+                  url: "/userForm",
+                  data: formData,
+                  processData: false,
+                  contentType: false
+              }).done(function(data){
+                  console.log("data is : ", data); 
+              })
+          }
+        });
+      });
     </script>   
   </body>
 
