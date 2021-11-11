@@ -266,7 +266,7 @@
     </tr>
      {{#each user}}
     <tr>
-      <td><img src="/userFormUploads/{{image}}" style="width: 100px;" /></td>
+      <td><img src="/uploads/{{image}}" style="width: 100px;" /></td>
       <td>{{fname}}</td>
       <td>{{address}}</td>
       <td>{{gender}}</td>
@@ -351,13 +351,15 @@
                 hobbyArray.push($(this).val()); 
             });
             var formData = new FormData();
+            formData.append('image', $('#image')[0].files[0]);
+
             formData.append('fname', $("#fname").val());
             formData.append('lname', $("#lname").val());
             formData.append('address', $("#address").val());
             formData.append('gender', $("#gender").val());
             formData.append('hobby', hobbyArray);
             formData.append('interestarea', $("#interestarea").val());
-           // formData.append('image', $('#image')[0].files[0].name);
+            formData.append('image', $('#image')[0].files[0].name);
 
           // ajax call 
               $.ajax({
