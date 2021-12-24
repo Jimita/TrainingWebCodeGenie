@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+      integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+      integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="/javascripts/user.js"> </script>
+        <link
+      rel="stylesheet"
+      href="/stylesheets/jquery.toast.css"
+    />
+    <script src="/javascripts/jquery.toast.js"> </script>
+
+  </head>
+  <body>
+
+    <div class="container">
+      <h3>Add User</h3>
+      <hr />
+      <form id="formid" method="POST">
+        <div class="name" id="nameid">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter Your Name.."
+          />
+        </div>
+        <br />
+
+        <div class="email" id="emailid">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter Your Email.."
+          />
+        </div><br />
+
+        <div class="mobile" id="mobileid">
+          <label for="mobile">Mobile</label>
+          <input
+            type="number"
+            name="mobile"
+            id="mobile"
+            placeholder="Enter Your Mobile.."
+          />
+        </div><br />
+
+        <div class="password" id="passwordid">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter Your Password.."
+          />
+        </div><br />
+
+        <input type="submit" value="Add User" />
+      </form>
+      <a href="/logout">Logout</a>
+
+    </div><br />
+
+    <br /><br /><hr /><br /><br />
+    <h1>User List...</h1>
+
+    <table id="tableid">
+      <button class="btn-success csv" id="csv">Export</button><br /><br />
+      <br />
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+      </tr>
+      {{#each user}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{email}}</td>
+          <td>{{mobile}}</td>
+        </tr>
+      {{/each}}
+
+    </table>
+    <br /><br />
+    <form
+      class="importclass"
+      id="importFormId"
+      method="POST"
+      action="/import"
+      enctype="multipart/form-data"
+    >
+      <input class="imp" type="file" id="importCsv" name="importCsv" />
+      <br />
+
+      <button
+        class="btn-import csvImport"
+        id="csvImportid"
+        data-toggle="modal"
+        data-target="#myModal"
+      >Import CSV</button>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
+            <h4 class="modal-title">Import CSV Fileds</h4>
+          </div>
+          <div class="modal-body">
+            <p>Select below Fields</p>
+            <input type="hidden" id="filenameId" class="filenameClass" />
+            <div class="form-check">
+              <label class="form-check-label" for="flexCheckDefault">
+                CSV contains Header..
+              </label>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value="headerValue"
+                id="headerOrNot"
+                name="headerOrNot"
+              />
+            </div>
+            <table id="tableid">
+              <tr>
+                <th>First Row</th>
+                <th>Second Row</th>
+                <th>Fields</th>
+              </tr>
+              <tbody id="tbody">
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default"
+              id="upload"
+            >Upload</button>
+            <button
+              type="button"
+              class="btn btn-default"
+              data-dismiss="modal"
+            >Close</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <div class="toast"></div>
+
+  {{!-- listing file data  --}}
+  <div class="container">
+            <table id="tableid">
+              <tr>
+                <th>File Name</th>
+                <th>Skip Row</th>
+                <th>Total Records</th>
+                <th>Total Uploaded</th>
+                <th>Duplicates/Discarded</th>
+                <th>Status</th>
+              </tr>
+              <tbody id="fileData">
+                <tr>
+                
+                </tr>
+              </tbody>
+            </table>
+  </div>
+  </body>
+</html>

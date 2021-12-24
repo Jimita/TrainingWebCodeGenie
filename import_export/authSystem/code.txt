@@ -1,0 +1,206 @@
+router.post(
+  "/import",
+  upload.single("importCsv"),
+  async function (req, res, next) {
+    try {
+      const obj = {};
+      var result;
+      console.log("obj finalll..", typeof obj);
+
+      if (req.file) {
+        console.log("file", req.file);
+        console.log("path", req.file.path);
+        var total;
+        /*
+        import csv to json
+      */
+        var jsonObj = await csvtojson().fromFile(req.file.path);
+        console.log("array from csv ", jsonObj);
+        result = jsonObj.map((csvData) => ({
+          name: csvData.name,
+          email: csvData.email,
+          mobile: csvData.mobile,
+          password: csvData.password,
+        }));
+        console.log("result ", result);
+        var firstObj = Object.keys(jsonObj)[0]
+        var secObj = Object.values(jsonObj)[0]
+        console.log("objsss", firstObj,secObj)
+        // total data in csv
+        total = Object.keys(result).length;
+
+        // dublicate element from arr of objects
+
+        for (let item = 0, len = total; item < len; item++) {
+          var count = 0;
+          var findData = (obj[result[item]["mobile"]] = result[item]);
+          let emailRegExp = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+          // validation before storing data
+          if (
+            emailRegExp.test(findData.name) == true ||
+            findData.name == null ||
+            findData.name == ""
+          ) {
+            console.log("Name is Invalid");
+            count++;
+          } else if (
+            findData.mobile.length < 10 ||
+            findData.mobile.length > 10
+          ) {
+            console.log("Mobile must be 10 digits only.");
+            count++;
+          } else if (
+            emailRegExp.test(findData.email) == false ||
+            findData.email == null ||
+            findData.email == ""
+          ) {
+            console.log("Email is Invalid");
+            count++;
+          } else {
+            var dublicateData = await userAuthModel.findOne({
+              mobile: findData.mobile,
+            });
+            console.log("dublicate data is ", dublicateData);
+            if (dublicateData) {
+            } else {
+              findData.password = "123456";
+              console.log("final data to store.. ", findData);
+              var data = await userAuthModel(findData);
+              data.save(function (err, data) {
+                if (err) {
+                  console.log("Error in Insert Record");
+                } else {
+                  res.send({
+                    flag: 1,
+                    message: "Success",
+                    formData: data,
+                    result: result,
+                    total: total,
+                    dublicateData: dublicateData,
+                    invalidUser: count,
+                  });
+                }
+              });
+            }
+          }
+        }
+      } else {
+        console.log("File not Found..");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+
+
+   $("#tbody").append(
+        "<tr class='table-info'> <td><input type='checkbox' value=" +
+          data.data.firstRow[index] +
+          " class='form-check-input' ></td> <td>" +
+          data.data.firstRow[index] +
+          "</td> <td>" +
+          data.data.secondRow[index] +
+          "</td> <td>  <select class='form-select'id=" +
+          data.data.firstRow[index] +
+          "-dropdown > <option value='' disabled >Select Value</option> <option value='name'>Name</option> <option value='email'>Email</option> <option value='mobile'>Mobile</option> </select></td></tr>"
+      );
+
+```
+Validation for selecting fields : 1) checkbox:null, 2)dropdown:null,onchange (selected value should not repeat),
+On successful validation, create FieldObject and file_id and send to ajax(route)
+
+route: readFile by (path/filename) 
+        convert csvToJson Object
+        count dublicate, discarded,total Uploaded from Object
+        store filtered data in users modal
+
+
+
+
+ var myObj = {
+                 field :$("#fieldName").val()
+              };
+                
+              console.log("myObj...",myObj)
+            $.ajax({
+                url: "/fieldAdd",
+                type: "POST",
+                data: myObj
+            }).done(function (data) {
+                console.log("dataaaa",data)
+               if(data.type=="success"){
+                console.log("ajaaaaaaaaaaaaa")
+
+
+                $(".form-select").append(`<option value='${myObj.field}'>${myObj.field}</option>`)
+
+               }
+            });
+
+
+
+Today's Task Report : 
+- mapping(with email and mobile logic)
+- cron schedular
+- add new fields(in dropdown logic)
+- added toast in dropdown validation(if selected same value in dropdown)
+- parent(),child(),closest(),attr(),prop()
+
+
+
+
+
+
+
+
+
+let dbfields = ["name", "email", "mobile"];
+      //in this we find all the new fields added in fieldModel
+      let allField = await fieldModel.find();
+      //map method take array of object
+      allField = allField.map(function(field){
+        return field.field
+      })
+      //we concat our field array and (name,email,mobile) array 
+      let alldbFields = dbfields.concat(allField);
+
+
+
+
+dataArray = result.toString().split(/\r?\n/);
+
+let firstRow = dataArray[0].split(",")
+secondRow: dataArray[1].split(","),
+
+let firstRow = dataArray[0].split(","),
+let secondRow = dataArray[1].split(","),
+
+
+
+ <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="hi"
+        id="headerOrNot"
+        name="headerOrNot"
+      />
+      <label class="form-check-label" for="flexCheckDefault">
+        if in your file have header then select this button...
+      </label>
+    </div>
+
+
+            let headerOrNot = $('input[name="headerOrNot"]:checked').val();
+        if (headerOrNot) {
+          formData["header"] = true;
+        }
+
+
+        let headerObj = {};
+          if (req.file.header == true) {
+          headerObj = { noheader: true };
+        }
+         const jsonArray = await csvtojson(headerObj).fromFile(csvFilePath);

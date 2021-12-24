@@ -1,0 +1,122 @@
+var cron = require("node-cron");
+var filesModel = require("../models/files_model");
+var userAuthModel = require("../models/userAuth_model");
+
+const csvtojson = require("csvtojson");
+
+let finalArr = [];
+let csvDuplicates = {};
+let total;
+let duplicates = 0;
+let discarded = 0;
+let totalUploaded = 0;
+let emailRegExp = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+var jsonObj;
+
+if (config.scheduler) {
+  cron.schedule(config.files.fileProcess.time, async () => {
+    var pendingFileData = await filesModel.find({
+      status: "inprogress",
+    });
+    console.log(
+      "---------------------pending data------------------- ",
+      pendingFileData.length
+    );
+    for (let file of pendingFileData) {
+      console.log("file in loop ", file._id);
+      let keysOfObject = Object.keys(file.fieldMappingObject);
+      let valueOfObject = Object.values(file.fieldMappingObject);
+      console.log("keysOfObject ",keysOfObject);
+      //["name", "email", "moblie"]
+      // for(let keyVal of keysOfObject){
+      //   console.log("validateKey",keyVal)
+      // }
+
+      jsonObj = await csvtojson({
+        noheader: true,
+      }).fromFile("./public/imports/" + file.name);
+
+      for (item = 0; item < jsonObj.length; item++) {
+        for (keyItem = 0; keyItem < valueOfObject.length; keyItem++) {
+          let userObj = jsonObj[item];
+          /*{
+          name:"jimita",
+        }*/
+          let mapVal = valueOfObject[keyItem]; // "field1"
+          let keys = keysOfObject[keyItem]; // "name"
+          // name
+          file.fieldMappingObject[keys] = userObj[mapVal]; //jimita
+        }
+        // discarded data
+        if (emailRegExp.test(file.fieldMappingObject.name) == true || file.fieldMappingObject.name == null || file.fieldMappingObject.name == "") {
+          // console.log("Name is Invalid");
+          discarded++;
+        } else if (emailRegExp.test(file.fieldMappingObject.email) == false) {
+          // console.log("Email is Invalid");
+          discarded++;
+        } else if (file.fieldMappingObject.mobile.length < 10 || file.fieldMappingObject.mobile.length > 10) {
+          //console.log("Mobile must be 10 digits only.");
+          discarded++;
+        }
+        // check csv objs duplication
+        else if (csvDuplicates[file.fieldMappingObject.email] || csvDuplicates[file.fieldMappingObject.mobile]) {
+          duplicates++;
+        } else {
+          let mobile = file.fieldMappingObject.email;
+          let email = file.fieldMappingObject.mobile;
+          csvDuplicates[mobile] = 1;
+          csvDuplicates[email] = 1;
+          // duplication csv data with userModel data
+          var duplicateUser = await userAuthModel.findOne({
+            $or: [{
+              email: file.fieldMappingObject.email,
+            }, {
+              mobile: file.fieldMappingObject.mobile,
+            }],
+          });
+          if (duplicateUser) {
+            duplicates++;
+          } else {
+            let lastObj = {
+              name: file.fieldMappingObject.name,
+              email: file.fieldMappingObject.email,
+              mobile: file.fieldMappingObject.mobile,
+              password: "no need password",
+            };
+            finalArr.push(lastObj);
+            totalUploaded++;
+          }
+        }
+      }
+      console.log("duplicates", duplicates);
+      console.log("discarded", discarded);
+      console.log("totalUploaded", totalUploaded);
+      // var fileData = await filesModel.updateOne({
+      //   _id: file._id,
+      // }, {
+      //   discarded: discarded,
+      // });
+      // insertMany to userAuth Model
+      var csvData = await userAuthModel.insertMany(finalArr);
+      // updateOne to files Model
+      var fileData = await filesModel.updateOne({
+        _id: file._id,
+      }, {
+        duplicates: duplicates,
+        discarded: discarded,
+        status: "success",
+      });
+      console.log(
+        "-------------------------------------------------------------------------------------------"
+      );
+    }
+  });
+
+  // cron.schedule(config.files.mailCron.time, async () => {
+  //     console.log("Another cron working")
+  //   });
+} else {
+  console.log("cron is off...");
+}
+
+// cron.start();
